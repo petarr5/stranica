@@ -1,0 +1,117 @@
+Zadaća 2.
+Petar Vladić 2220/RR   
+
+Zadatak 2.1 Pristupite resursu s vašeg računala putem preglednika (po vašem izboru):
+http://info.cern.ch/hypertext/WWW/TheProject.html
+te odgovorite na pitanja (svaki odgovor pokrijepiti analizom ili dijelom HTTP poruke
+koji se odnosi ili nam daje taj odgovor):
+
+a) Pokreće li vaš preglednik HTTP verziju 1.0 ili 1.1?
+Moje pregeldnik pokreće verziju HTTP 1.1 što možemo iščitati iz zaglavlja HTTP odgovora u kojem piše koja je verzija HTTP korištena. O verziji koja će se koristit odlučuje naš host server.
+HTTP/1.1 304 Not Modified
+Date: Sun, 19 Nov 2023 13:59:25 GMT
+Server: Apache
+Connection: close
+ETag: "8a9-291e721905000"
+Statusni kod "304 Not Modified" - u HTTP odgovoru označava da resurs koji želimo dohvatiti se nije promjenio od posljednjeg puta kada smo ga dohvatili i stoga ga nije potrebno ponovno preuzeti. Umjesto toga, preglednik  koristiti lokalnu kopiju koju već ima.
+HTTP/1.1 - Ovo označava verziju HTTP protokola koja se koristi. U ovom slučaju, to je HTTP/1.1, što je česta i suvremena verzija protokola.
+
+b) Koja je verzija HTTP-a poslužitelja pokrenuta kad pristupite npr sa sum.ba?
+Kod pokretanja sum.ba servera koristi se ista HTTP 1.1 verzija što možemo vidjeti u zaglavlju odgovora.
+HTTP/1.1 304 Not Modified
+Server: nginx/1.18.0 (Ubuntu)
+Date: Sun, 19 Nov 2023 14:20:50 GMT
+Connection: keep-alive
+Set-Cookie: i18n_redirected=hr; Max-Age=31536000; Path=/; SameSite=Lax
+Statusni kod "304 Not Modified" - u HTTP odgovoru označava da resurs koji želimo dohvatiti se nije promjenio od posljednjeg puta kada smo ga dohvatili i stoga ga nije potrebno ponovno preuzeti. Umjesto toga, preglednik  koristiti lokalnu kopiju koju već ima.
+HTTP/1.1 - Ovo označava verziju HTTP protokola koja se koristi. U ovom slučaju, to je HTTP/1.1, što je česta i suvremena verzija protokola.
+
+c) Koje jezike (ako postoje) vaš preglednik pokazuje da može prihvatiti na poslužitelju?
+Preglednik mi pokazuje da mogu prihvatiti engleski jezik što možemo vidjeti u odgovoru.
+Accept-Language: en-US,en;q=0.9
+Ovdje je naznačeno da moje preglednik preferira engleski jezik, s naglaskom na američku varijantu istog. Ako takav jezik nije dostupan, prihvatljiv je bilo koji drugi oblik engleskog. 
+
+d) Koja je IP adresa vašeg računala? A koja je IP adresa sum.ba?
+Moja IP adresa je Address:  77.77.193.0, a adresa sum.ba je 
+Remote Address: 212.39.111.33:443.
+"Remote Address" predstavlja udaljenu IP adresu i ona varira ovisno o stranici koju pregledavamo i o načinu na koji je konfigurirana mrežna komunikacija.
+
+e) Kada je HTML datoteka koju dohvaćate zadnji put modificirana na poslužitelju?
+Datoteka koju sam otvarao nalazi se na linku koji je postavljen u dokumentu zadaće, a ovdje je ispisano kada je ta datoteka zadnji put modifcirana.
+Last-Modified: Thu, 03 Dec 1992 08:37:20 GMT
+
+f) Koliko se bajtova sadržaja vraća u vaš preglednik?
+Za istu stranicu (stranica iz e) primjera) se vraća u preglednik:
+"128 B transferred" označava ukupnu količinu podataka koja je prenesena tijekom učitavanje stranice. Dok je veličina samog sadržaja iznosi 2217B.
+"Content-Length: 2217"
+
+g) Koji softver/web poslužitelj poslužje web stranicu na server,navedite odakle vidite?
+Odgovor možemo vijeti u zaglavlju HTTP odgovora. U mome primjeru to je Apache server(stanica e) primjera).
+"Server: Apache"
+
+h) Koje jezike vaš web preglednik može prihvatiti?
+Preglednik mi pokazuje da mogu prihvatiti engleski jezik što možemo vidjeti u odgovoru.
+Accept-Language: en-US,en;q=0.9
+Ovdje je naznačeno da moje preglednik preferira engleski jezik, s naglaskom na američku varijantu istog. Ako takav jezik nije dostupan, prihvatljiv je bilo koji drugi oblik engleskog.
+
+2.2. Pristup različitim resursima
+Pristupite sljedećim resursima te za svaki resurs napišite HTTP odgovor koji dobijete
+(bez tijela), te za svaki resurs odgovorite:
+a) kojem MIME formatu resursa se radi:
+b) kolika je veličina resursa (u byte-ima)
+c) koja je verzija HTTP poslužitelj
+Resursi su:
+1) http://web-admin.sum.ba/api/storage/pravilnik_mobilnost_1552858671_80.pdf
+2) https://eucenje.sum.ba/moodle/pluginfile.php/1/core_admin/logocompact/300x
+300/1698654623/Logo%20sumarum.png
+3) https://mirrors.edge.kernel.org/linuxmint/stable/10/sha256sum.txt
+
+1)
+MIME foramt: application/pdf
+Veličina resursa: 799 679
+Verzija HTTP-a: HTTP/1.1 
+
+HTTP/1.1 200 OK
+Date: Sun, 19 Nov 2023 15:52:46 GMT
+Server: Apache/2.4.29 (Ubuntu)
+Cache-Control: no-cache, private
+Content-Type: application/pdf
+
+2)
+MIME foramt: image/png
+Veličina resursa: 15684
+Verzija HTTP-a: HTTP/1.1
+
+HTTP/1.1 200 OK
+Server: nginx/1.14.0 (Ubuntu)
+Date: Sun, 19 Nov 2023 16:00:11 GMT
+Content-Type: image/png
+Content-Length: 15684
+Connection: keep-alive
+Set-Cookie: MoodleSession=5bgktbros1ai15vlnajhhgp5ot; path=/moodle/; secure
+Content-Disposition: inline; filename="Logo sumarum.png"
+Cache-Control: public, max-age=5184000, no-transform
+Expires: Thu, 18 Jan 2024 16:00:11 GMT
+Pragma:
+Accept-Ranges: bytes
+Last-Modified: Mon, 30 Oct 2023 08:30:25 GMT
+
+3)
+MIME foramt: text/plain
+Veličina resursa: 1087
+Verzija HTTP-a: HTTP/1.1
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 19 Nov 2023 16:05:16 GMT
+Content-Type: text/plain
+Content-Length: 1087
+Last-Modified: Mon, 14 Mar 2011 13:57:15 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src https:
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=15768001
+Accept-Ranges: bytes
